@@ -48,17 +48,6 @@ class PDF:
 
     # == methods == #
 
-    def add_image(self, pdf: canvas.Canvas, path: str) -> NoReturn:
-
-        with Image.open(path) as img:
-            pdf.setPageSize(img.size)
-
-        if float(path.split('/')[-1].split('.')[0]) == 0:
-            pdf.addOutlineEntry(basename(path), path, 0, 0)
-
-        pdf.drawImage(ImageReader(path), 0, 0,mask='auto')
-        pdf.showPage()
-
     def create_pdf(self) -> int:
         """
         creates a pdf with the images provided
@@ -77,7 +66,18 @@ class PDF:
             images_paths.sort()
 
             for image_path in images_paths:
-                self.add_image(pdf, f'{folder}/{image_path}')
+                self.pages += 1
+                path: str = f'{folder}/{image_path}'
+
+                with Image.open(path) as img:
+                    pdf.setPageSize(img.size)
+
+                if float(path.split('/')[-1].split('.')[0]) == 0:
+                    pdf.addOutlineEntry(basename(path), path, 0, 0)
+
+                pdf.drawImage(ImageReader(path), 0, 0, mask='auto')
+                pdf.showPage()
+
         pdf.save()
 
 
@@ -86,4 +86,3 @@ if __name__ == '__main__':
     images = list(test.images.keys())
     images.sort()
     test.create_pdf()
-    print(images)
