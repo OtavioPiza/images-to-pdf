@@ -48,7 +48,7 @@ class PDF:
 
     # == methods == #
 
-    def create_pdf(self) -> int:
+    def create_pdf(self) -> NoReturn:
         """
         creates a pdf with the images provided
 
