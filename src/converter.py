@@ -13,7 +13,7 @@ from typing import List, NoReturn
 from PIL import Image
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
-from os.path import basename
+from os.path import dirname
 
 from src.image_scaner import get_images
 
@@ -64,16 +64,19 @@ class PDF:
         for folder in folders:
             images_paths: List[str] = self.images[folder]
             images_paths.sort()
+            first = True
 
             for image_path in images_paths:
                 self.pages += 1
                 path: str = f'{folder}/{image_path}'
 
+                if first:
+                    pdf.bookmarkPage(path)
+                    pdf.addOutlineEntry(f'{dirname(path).split("/")[-1]}', path, 0, 0)
+                    first = False
+
                 with Image.open(path) as img:
                     pdf.setPageSize(img.size)
-
-                if float(path.split('/')[-1].split('.')[0]) == 0:
-                    pdf.addOutlineEntry(basename(path), path, 0, 0)
 
                 pdf.drawImage(ImageReader(path), 0, 0, mask='auto')
                 pdf.showPage()
