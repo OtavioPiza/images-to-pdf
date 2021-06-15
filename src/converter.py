@@ -10,6 +10,10 @@ contains the functions necessary to create a pdf file from images
 # ======= #
 
 from typing import List, NoReturn
+from PIL import Image
+from reportlab.lib.utils import ImageReader
+from reportlab.pdfgen import canvas
+from os.path import basename
 
 from src.image_scaner import get_images
 
@@ -23,13 +27,15 @@ class PDF:
 
     # == special methods == #
 
-    def __init__(self, images_paths: List[str], pdf_path: str = '') -> NoReturn:
+    def __init__(self, title: str, images_paths: List[str], pdf_path: str = '', author: str = '') -> NoReturn:
         """
         :param images_path: paths to folder with image files
         :param pdf_path: path to save the pdf file
         """
         self.pages = 0
-        self.pdf_path = 'pdf' if not pdf_path else pdf_path
+        self.title = title
+        self.author = author
+        self.pdf_path = '.' if not pdf_path else pdf_path
         self.images = get_images(images_paths)
 
     def __len__(self) -> int:
@@ -40,7 +46,44 @@ class PDF:
         """
         return self.pages
 
+    # == methods == #
+
+    def add_image(self, pdf: canvas.Canvas, path: str) -> NoReturn:
+
+        with Image.open(path) as img:
+            pdf.setPageSize(img.size)
+
+        if float(path.split('/')[-1].split('.')[0]) == 0:
+            pdf.addOutlineEntry(basename(path), path, 0, 0)
+
+        pdf.drawImage(ImageReader(path), 0, 0,mask='auto')
+        pdf.showPage()
+
+    def create_pdf(self) -> int:
+        """
+        creates a pdf with the images provided
+
+        :return: number of pages created
+        """
+        pdf = canvas.Canvas(f'{self.pdf_path}/{self.title}.pdf')
+        pdf.setTitle(self.title)
+        pdf.setAuthor(self.author)
+
+        folders: List[str] = list(self.images.keys())
+        folders.sort()
+
+        for folder in folders:
+            images_paths: List[str] = self.images[folder]
+            images_paths.sort()
+
+            for image_path in images_paths:
+                self.add_image(pdf, f'{folder}/{image_path}')
+        pdf.save()
+
 
 if __name__ == '__main__':
-    test = PDF(['../test'])
-    print(test.images)
+    test = PDF('test', ['../test'])
+    images = list(test.images.keys())
+    images.sort()
+    test.create_pdf()
+    print(images)
