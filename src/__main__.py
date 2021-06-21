@@ -1,5 +1,7 @@
-from tkinter import Tk, X, N
+from tkinter import Tk, X, N, Label
 from typing import NoReturn
+
+from gui.frame_main import MainFrame
 
 
 class App:
@@ -19,6 +21,7 @@ class App:
         # == display menu == #
 
         self.update_center()
+        self.root.mainloop()
 
     # == methods == #
 
@@ -32,7 +35,7 @@ class App:
             self.center.destroy()
 
         if mode == 'main':
-            pass
+            self.center = MainFrame(self.root, None, None)
 
         else:
             pass
@@ -40,5 +43,4 @@ class App:
         self.center.pack(padx=10, pady=10, fill=X, anchor=N)
 
 
-if __name__ == '__main__':
-    App()
+App()
