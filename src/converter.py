@@ -82,10 +82,3 @@ class PDF:
                 pdf.showPage()
 
         pdf.save()
-
-
-if __name__ == '__main__':
-    test = PDF('test', ['../test'])
-    images = list(test.images.keys())
-    images.sort()
-    test.create_pdf()
