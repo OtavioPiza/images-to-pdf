@@ -8,10 +8,17 @@ class App:
         """
         constructor
         """
+
+        # == set up window == #
+
         self.root = Tk()
-        self.root.geometry('200X150')
+        self.root.geometry('200x150')
         self.root.title('Images to PDF')
         self.center = None
+
+        # == display menu == #
+
+        self.update_center()
 
     # == methods == #
 
@@ -32,3 +39,6 @@ class App:
 
         self.center.pack(padx=10, pady=10, fill=X, anchor=N)
 
+
+if __name__ == '__main__':
+    App()
