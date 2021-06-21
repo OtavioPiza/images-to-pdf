@@ -1,10 +1,13 @@
-from tkinter import Tk, X, N, Label
+from tkinter import Tk, X, N
 from typing import NoReturn
 
-from gui.frame_main import MainFrame
+from src.gui.frame_main import MainFrame
 
 
 class App:
+    """
+    Class for the image to pdf converter application
+    """
 
     def __init__(self):
         """
@@ -35,7 +38,7 @@ class App:
             self.center.destroy()
 
         if mode == 'main':
-            self.center = MainFrame(self.root, None, None)
+            self.center = MainFrame(self.root)
 
         else:
             pass
