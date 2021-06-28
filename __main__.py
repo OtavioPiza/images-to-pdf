@@ -1,9 +1,7 @@
-from tkinter import Tk, X, N
+from tkinter import Tk
 from tkinter.filedialog import askdirectory
-from typing import NoReturn
 
 from src.converter import PDF
-from src.gui.frame_main import MainFrame
 
 
 class App:
