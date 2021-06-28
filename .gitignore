@@ -2,3 +2,6 @@ test
 *.pdf
 .idea
 __pychache__
+*.spec
+build
+dist
