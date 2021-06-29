@@ -17,7 +17,7 @@ class App:
         # == set up window == #
 
         self.root = Tk()
-        self.root.geometry('200x100')
+        self.root.geometry('400x90')
         self.root.title('Images to PDF')
         self.center = None
 
