@@ -17,7 +17,7 @@ class App:
         # == set up window == #
 
         self.root = Tk()
-        self.root.geometry('200x150')
+        self.root.geometry('200x100')
         self.root.title('Images to PDF')
         self.center = None
 
@@ -38,7 +38,7 @@ class App:
             self.center.destroy()
 
         if mode == 'main':
-            self.center = MainFrame(self.root)
+            self.center = MainFrame(self.root, self.update_center)
 
         else:
             pass
