@@ -9,7 +9,7 @@ contains the functions necessary to create a pdf file from images
 # imports #
 # ======= #
 
-from typing import List, NoReturn
+from typing import List, NoReturn, Union
 from PIL import Image
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
@@ -48,7 +48,7 @@ class PDF:
 
     # == methods == #
 
-    def create_pdf(self) -> NoReturn:
+    def create_pdf(self, updater: Union[None, (int, )] = None) -> NoReturn:
         """
         creates a pdf with the images provided
 
@@ -80,5 +80,8 @@ class PDF:
 
                 pdf.drawImage(ImageReader(path), 0, 0, mask='auto')
                 pdf.showPage()
+
+                if updater:
+                    updater(self.pages)
 
         pdf.save()
