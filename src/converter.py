@@ -48,7 +48,7 @@ class PDF:
 
     # == methods == #
 
-    def create_pdf(self, updater: Union[None, (int, )] = None) -> NoReturn:
+    def create_pdf(self, updater: Union[None, int] = None) -> NoReturn:
         """
         creates a pdf with the images provided
 
