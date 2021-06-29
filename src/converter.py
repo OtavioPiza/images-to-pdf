@@ -37,6 +37,7 @@ class PDF:
         self.author = author
         self.pdf_path = '.' if not pdf_path else pdf_path
         self.images = get_images(images_paths)
+        self.total = sum(len(self.images[k]) for k in self.images.keys())
 
     def __len__(self) -> int:
         """
@@ -48,7 +49,7 @@ class PDF:
 
     # == methods == #
 
-    def create_pdf(self, updater: Union[None, int] = None) -> NoReturn:
+    def create_pdf(self, updater: Union[None, (int)] = None) -> NoReturn:
         """
         creates a pdf with the images provided
 
@@ -82,6 +83,6 @@ class PDF:
                 pdf.showPage()
 
                 if updater:
-                    updater(self.pages)
+                    updater(100 / self.total)
 
         pdf.save()
