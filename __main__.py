@@ -1,8 +1,6 @@
-from tkinter import Tk, messagebox, X, N
-from tkinter.filedialog import askdirectory
+from tkinter import Tk, X, N
 from typing import NoReturn
 
-from src.converter import PDF
 from src.gui.frame_main import MainFrame
 
 
@@ -23,11 +21,9 @@ class App:
         self.root.title('Images to PDF')
         self.center = None
 
-        path_to_images = askdirectory(title='Select a folder with the images', initialdir='~')
-        pdf = PDF(path_to_images.split('/')[-1], [path_to_images], '/'.join(path_to_images.split('/')[:-1]))
-        pdf.create_pdf()
+        self.update_center()
 
-        messagebox.showinfo('Images to PDF', 'PDF created')
+        self.root.mainloop()
 
     def update_center(self, mode: str = 'main') -> NoReturn:
         """
