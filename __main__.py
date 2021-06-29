@@ -1,7 +1,9 @@
-from tkinter import Tk, messagebox
+from tkinter import Tk, messagebox, X, N
 from tkinter.filedialog import askdirectory
+from typing import NoReturn
 
 from src.converter import PDF
+from src.gui.frame_main import MainFrame
 
 
 class App:
@@ -26,7 +28,6 @@ class App:
         pdf.create_pdf()
 
         messagebox.showinfo('Images to PDF', 'PDF created')
-
 
     def update_center(self, mode: str = 'main') -> NoReturn:
         """
