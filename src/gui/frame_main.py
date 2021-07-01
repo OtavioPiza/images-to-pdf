@@ -25,7 +25,8 @@ class MainFrame(LabelFrame):
         self.pb.grid(row=1, column=0)
 
         self.ps_text = StringVar()
-        self.ps_text.set(f'{self.pb["value"]:.2f}% complete' if self.pb["value"] else 'select a folder')
+        self.ps_text.set(f'Scanning images: {self.pb["value"]:.2f}% complete' if self.pb["value"]
+                         else 'select a folder')
 
         self.label = Label(self, textvariable=self.ps_text)
         self.label.grid(row=2, column=0, sticky='news')
