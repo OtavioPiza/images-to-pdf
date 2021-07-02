@@ -41,5 +41,5 @@ class MainFrame(LabelFrame):
 
     def increase_progress_bar(self, i: int):
         self.pb['value'] += i
-        self.ps_text.set(f'{self.pb["value"]:.2f}% complete')
+        self.ps_text.set(f'Scanning images: {self.pb["value"]:.2f}% complete')
         self.update()
