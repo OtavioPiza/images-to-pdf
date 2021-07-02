@@ -37,6 +37,7 @@ class PDF:
         self.author = author
         self.pdf_path = '.' if not pdf_path else pdf_path
         self.images = get_images(images_paths)
+        self.pdf: Union[None, canvas.Canvas] = None
         self.total = sum(len(self.images[k]) for k in self.images.keys())
 
     def __len__(self) -> int:
@@ -49,15 +50,10 @@ class PDF:
 
     # == methods == #
 
-    def create_pdf(self, updater: Union[None, (int)] = None) -> NoReturn:
-        """
-        creates a pdf with the images provided
-
-        :return: number of pages created
-        """
-        pdf = canvas.Canvas(f'{self.pdf_path}/{self.title}.pdf')
-        pdf.setTitle(self.title)
-        pdf.setAuthor(self.author)
+    def add_pages(self, updater: Union[None, (int)] = None) -> NoReturn:
+        self.pdf = canvas.Canvas(f'{self.pdf_path}/{self.title}.pdf')
+        self.pdf.setTitle(self.title)
+        self.pdf.setAuthor(self.author)
 
         folders: List[str] = list(self.images.keys())
         folders.sort()
@@ -72,17 +68,24 @@ class PDF:
                 path: str = f'{folder}/{image_path}'
 
                 if first:
-                    pdf.bookmarkPage(path)
-                    pdf.addOutlineEntry(f'{dirname(path).split("/")[-1]}', path, 0, 0)
+                    self.pdf.bookmarkPage(path)
+                    self.pdf.addOutlineEntry(f'{dirname(path).split("/")[-1]}', path, 0, 0)
                     first = False
 
                 with Image.open(path) as img:
-                    pdf.setPageSize(img.size)
+                    self.pdf.setPageSize(img.size)
 
-                pdf.drawImage(ImageReader(path), 0, 0, mask='auto')
-                pdf.showPage()
+                self.pdf.drawImage(ImageReader(path), 0, 0, mask='auto')
+                self.pdf.showPage()
 
                 if updater:
                     updater(100 / self.total)
 
-        pdf.save()
+    def create_pdf(self, updater: Union[None, (int)] = None) -> NoReturn:
+        """
+        creates a pdf with the images provided
+
+        :return: number of pages created
+        """
+        self.add_pages(updater)
+        self.pdf.save()
