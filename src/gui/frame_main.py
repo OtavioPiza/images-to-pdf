@@ -35,7 +35,10 @@ class MainFrame(LabelFrame):
         path_to_images = askdirectory(title='Select a folder with the images', initialdir='~')
 
         pdf = PDF(path_to_images.split('/')[-1], [path_to_images], '/'.join(path_to_images.split('/')[:-1]), '')
-        pdf.create_pdf(self.increase_progress_bar)
+        pdf.add_pages(self.increase_progress_bar)
+        self.ps_text.set('Saving the PDF...')
+        self.update()
+        pdf.create_pdf()
         messagebox.showinfo('Images to PDF', message='PDF created')
         self.do_reset()
 
