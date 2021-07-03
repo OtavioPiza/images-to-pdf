@@ -81,11 +81,10 @@ class PDF:
                 if updater:
                     updater(100 / self.total)
 
-    def create_pdf(self, updater: Union[None, (int)] = None) -> NoReturn:
+    def create_pdf(self) -> NoReturn:
         """
         creates a pdf with the images provided
 
         :return: number of pages created
         """
-        self.add_pages(updater)
         self.pdf.save()
