@@ -1,14 +1,14 @@
 from tkinter import Tk, LabelFrame, messagebox, StringVar, Label
 from tkinter.filedialog import askdirectory
 from tkinter.ttk import Button, Progressbar
-from typing import NoReturn
+from typing import Callable, NoReturn
 
 from src.converter import PDF
 
 
 class MainFrame(LabelFrame):
 
-    def __init__(self, root: Tk, do_reset: ()):
+    def __init__(self, root: Tk, do_reset: Callable):
         LabelFrame.__init__(self, root)
 
         self.columnconfigure(0, weight=1)
