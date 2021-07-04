@@ -72,7 +72,8 @@ class PDF:
 
                 if first:
                     self.pdf.bookmarkPage(path)
-                    self.pdf.addOutlineEntry(f'{dirname(path).split("/")[-1]}', path, 0, 0)
+                    self.pdf.addOutlineEntry(
+                        f'{dirname(path).split("/")[-1]}', path, 0, 0)
                     first = False
 
                 with Image.open(path) as img:
