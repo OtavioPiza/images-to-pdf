@@ -1,7 +1,22 @@
+"""
+main file for the images to pdf application
+
+:version: 2021.07.04
+:author: Otavio Sartorelli de Toledo Piza
+"""
+
+# ======= #
+# imports #
+# ======= #
+
 from tkinter import Tk, X, N
 from typing import NoReturn
 
 from src.gui.frame_main import MainFrame
+
+# ======= #
+# classes #
+# ======= #
 
 
 class App:
