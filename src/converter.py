@@ -24,6 +24,9 @@ from src.image_scaner import get_images
 
 
 class PDF:
+    """
+    class representing a pdf
+    """
 
     # == special methods == #
 
