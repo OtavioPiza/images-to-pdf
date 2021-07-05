@@ -46,7 +46,7 @@ class MainFrame(LabelFrame):
         if not path_to_images:
             return
 
-        # == create pdf == #
+        # == create progress label == #
 
         self.rowconfigure(2, weight=1)
         self.label_text = StringVar()
@@ -56,11 +56,15 @@ class MainFrame(LabelFrame):
         self.label = Label(self, textvariable=self.label_text)
         self.label.grid(row=2, column=0, sticky='news')
 
+        # == scan images == #
+
         pdf = PDF(path_to_images.split('/')[-1], [path_to_images], '/'.join(path_to_images.split('/')[:-1]), '')
         pdf.add_pages(self.increase_progress_bar)
 
         self.label_text.set('Saving the PDF...')
         self.update()
+
+        # == create pdf == #
 
         pdf.create_pdf()
         messagebox.showinfo('Images to PDF', message='PDF created')
