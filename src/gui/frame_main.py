@@ -24,7 +24,6 @@ class MainFrame(LabelFrame):
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
-        self.rowconfigure(2, weight=1)
 
         # == add widgets == #
 
@@ -34,12 +33,7 @@ class MainFrame(LabelFrame):
         self.progress_bar = Progressbar(self, orient='horizontal', mode='determinate', length=1000)
         self.progress_bar.grid(row=1, column=0)
 
-        self.label_text = StringVar()
-        self.label_text.set(f'Scanning images: {self.progress_bar["value"]:.2f}% complete' if self.progress_bar["value"]
-                         else 'select a folder')
-
-        self.label = Label(self, textvariable=self.label_text)
-        self.label.grid(row=2, column=0, sticky='news')
+        
 
     def create_pdf(self) -> NoReturn:
         """
@@ -53,6 +47,14 @@ class MainFrame(LabelFrame):
             return
 
         # == create pdf == #
+
+        self.rowconfigure(2, weight=1)
+        self.label_text = StringVar()
+        self.label_text.set(f'Scanning images: {self.progress_bar["value"]:.2f}% complete' if self.progress_bar["value"]
+                         else 'select a folder')
+
+        self.label = Label(self, textvariable=self.label_text)
+        self.label.grid(row=2, column=0, sticky='news')
 
         pdf = PDF(path_to_images.split('/')[-1], [path_to_images], '/'.join(path_to_images.split('/')[:-1]), '')
         pdf.add_pages(self.increase_progress_bar)
