@@ -28,17 +28,17 @@ class MainFrame(LabelFrame):
 
         # == add widgets == #
 
-        self.bt = Button(self, text='Create PDF', command=self.create_pdf)
-        self.bt.grid(row=0, column=0, sticky='news')
+        self.button = Button(self, text='Create PDF', command=self.create_pdf)
+        self.button.grid(row=0, column=0, sticky='news')
 
-        self.pb = Progressbar(self, orient='horizontal', mode='determinate', length=1000)
-        self.pb.grid(row=1, column=0)
+        self.progress_bar = Progressbar(self, orient='horizontal', mode='determinate', length=1000)
+        self.progress_bar.grid(row=1, column=0)
 
-        self.ps_text = StringVar()
-        self.ps_text.set(f'Scanning images: {self.pb["value"]:.2f}% complete' if self.pb["value"]
+        self.label_text = StringVar()
+        self.label_text.set(f'Scanning images: {self.progress_bar["value"]:.2f}% complete' if self.progress_bar["value"]
                          else 'select a folder')
 
-        self.label = Label(self, textvariable=self.ps_text)
+        self.label = Label(self, textvariable=self.label_text)
         self.label.grid(row=2, column=0, sticky='news')
 
     def create_pdf(self) -> NoReturn:
@@ -57,7 +57,7 @@ class MainFrame(LabelFrame):
         pdf = PDF(path_to_images.split('/')[-1], [path_to_images], '/'.join(path_to_images.split('/')[:-1]), '')
         pdf.add_pages(self.increase_progress_bar)
 
-        self.ps_text.set('Saving the PDF...')
+        self.label_text.set('Saving the PDF...')
         self.update()
 
         pdf.create_pdf()
@@ -71,6 +71,6 @@ class MainFrame(LabelFrame):
 
         :param i: progress bar increment
         """
-        self.pb['value'] += i
-        self.ps_text.set(f'Scanning images: {self.pb["value"]:.2f}% complete')
+        self.progress_bar['value'] += i
+        self.label_text.set(f'Scanning images: {self.progress_bar["value"]:.2f}% complete')
         self.update()
