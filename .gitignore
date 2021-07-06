@@ -4,7 +4,6 @@ test
 __pychache__
 *.spec
 build
-dist
 src/__pycache__/
 
 src/gui/__pycache__/
