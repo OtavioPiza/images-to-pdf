@@ -7,3 +7,4 @@ build
 src/__pycache__/
 src/gui/__pycache__/
 __pycache__/
+.vscode/
