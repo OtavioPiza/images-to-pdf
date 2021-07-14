@@ -4,7 +4,9 @@ Simple and easy to use images to pdf converter
 ## Download
 <!-- TODO add downloads for linux mac and windows -->
 [MacOs](https://github.com/OtavioPiza/images-to-pdf/raw/main/dist/images-to-pdf%5BMacOs%5D.zip)
+
 [Windows](https://github.com/OtavioPiza/images-to-pdf/raw/main/dist/images-to-pdf%5Bwindows%5D.exe)
+
 [Debian](https://github.com/OtavioPiza/images-to-pdf/raw/main/dist/images-to-pdf%5Blinux%5D.out)
 
 ## Usage
