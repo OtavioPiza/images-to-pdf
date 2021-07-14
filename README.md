@@ -21,9 +21,12 @@ conda create --name images-to-pdf python=3.9
 ```
 
 You will also need to install the following packages:
-- reportlab
-- pyinstaller [optional] 
-  
-  
+
+| package | function | anaconda command |
+| ------- | -------- | ---------------- |
+| reportlab | creates the pdf | ```conda install -c anaconda reportlab```  |
+| pyinstaller | creates the executables | ```conda install -c conda-forge pyinstaller``` |
+
+
 ## Feature Requests
 To request a feature, open a GitHub request but keep in mind that this application's focus is on simplicity.
